@@ -7,7 +7,7 @@ else:
 
     for i in range(2, numero):
         if numero % i == 0:
-            primo = False  
+            primo = False
             break
 
     if primo:
