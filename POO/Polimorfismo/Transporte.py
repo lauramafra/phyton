@@ -3,32 +3,32 @@ class Transporte:
         self.nome = nome
 
     def viajar(self):
-        return "Viajando..."
+        print(f"{self.nome}: Viajando...")
 
 class Aviao(Transporte):
     def viajar(self):
-            return "Voando..."
+        print(f"{self.nome}: Voando...")
 
 class Navio(Transporte):
     def viajar(self):
-        return "Navegando..."
+        print(f"{self.nome}: Navegando...")
 
 class Trem(Transporte):
     def viajar(self):
-        return "Viajando de trem..."
+        print(f"{self.nome}: Viajando de trem...")
 
 
 def iniciar_viagem(transporte):
     transporte.viajar()
 
-#Criando os objetos
-aviao = Aviao("Boeing 737")
-navio = Navio("Titanic")
-trem = Trem("Expresso de Hogwarts")
+# 1. Criando objetos
+meu_aviao = Aviao("Boeing 737")
+meu_navio = Navio("Titanic")
+meu_trem = Trem("Expresso de Hogwarts")
 
-#Criando a lista com os objetos (e não as classes)
-lista_de_transportes = [aviao, navio, trem]
+# 2. Criando a lista com os objetos
+lista_de_transportes = [meu_aviao, meu_navio, meu_trem]
 
-#Usando a função iniciar_viagem() em um loop para testar o polimorfismo
+# 3. Usando a função iniciar_viagem() em um loop para testar o polimorfismo
 for veiculo in lista_de_transportes:
     iniciar_viagem(veiculo)
