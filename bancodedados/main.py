@@ -19,5 +19,5 @@ try:
     except mysql.connector.Error as erro:
         print(f"Erro: {erro}")
 
-    finally if comexao and conexao.is_connected():
+    finally if conexao and conexao.is_connected():
         conexao.close()
