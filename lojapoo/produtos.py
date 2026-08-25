@@ -1,8 +1,10 @@
-from banco import conectar
+from bancodedados.config import DB_CONFIG
+from models import Produto
+import mysql.connector
 
 def inserir_produto_inicial():
-    """Insere os dados iniciais na tabela produtosL caso esteja vazia."""
-    conexao = conectar()
+
+    conexao = None
     if conexao:
         cursor = conexao.cursor()
         cursor.execute("SELECT COUNT(*) FROM produtosL")
@@ -26,18 +28,21 @@ def inserir_produto_inicial():
 
 def listar_todos_produtos():
     """Retorna todos os produtos (SELECT * FROM produtosL)."""
-    conexao = conectar()
+    conexao = None
     if conexao:
-        cursor = conexao.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM produtosL")
-        produtos = cursor.fetchall()
-        cursor.close()
+        cursor = mysql.connector.connect(**DB_CONFIG)
+        cursor = conexao.cursor()
+        cursor.execute("SELECT * FROM produtosL ORDER BY nome")
+        return[Produto.reverte_tupla(linha) for linha in cursor.fetchall()]
+    except mysql.connector.Error as erro:
+        print(f"Erro ao Listar: {erro}")
+    finally:
+        if conexao and conexao.is_connected():
         conexao.close()
-        return produtos
 
 def atualizar_produto_3():
     """Atualização do ID 3: preço = 89.90."""
-    conexao = conectar()
+    conexao = None
     if conexao:
         cursor = conexao.cursor()
         sql = "UPDATE produtosL SET preco = %s WHERE id = %s"
@@ -49,7 +54,7 @@ def atualizar_produto_3():
 
 def atualizar_produto_4():
     """Atualização do ID 4: preço = 79.90 e quantidade = 25."""
-    conexao = conectar()
+    conexao = None
     if conexao:
         cursor = conexao.cursor()
         sql = "UPDATE produtosL SET preco = %s, quantidade = %s WHERE id = %s"
