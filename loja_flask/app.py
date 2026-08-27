@@ -10,7 +10,7 @@ def index():
 
 @app.route("/produtos")
 def produtos():
-    return render_template("produtos.html")
+    return render_template(template_name_or_list= "produtos.html")
 
 @app.route("/sobre")
 def sobre():
